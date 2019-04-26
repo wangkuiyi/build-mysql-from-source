@@ -1,0 +1,5 @@
+.dockerignore
+*~
+boost
+build
+mysql-server
