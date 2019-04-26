@@ -7,7 +7,8 @@ RUN apt install -y build-essential cmake make gcc
 RUN apt install -y libncurses5-dev 
 RUN apt install -y bison m4
 RUN apt install -y git
+RUN apt install -y libnuma-dev
 
 COPY build.sh /build.sh
 RUN chmod +x /build.sh
-ENTRYPOINT ["/build.sh"]
+CMD ["/build.sh"]
