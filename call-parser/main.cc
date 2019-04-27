@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "sql_parse.h"
 #include "sql_class.h"
-#include "sql_lex.h"
 #include "sql_digest.h"
+#include "sql_lex.h"
+#include "sql_parse.h"
 #include "table.h"
 
 int main() {
@@ -15,20 +15,21 @@ int main() {
   bool rc;
 
   Parser_state parser_state;
-  if (parser_state.init(&thd, query_text, query_length))    {
+  if (parser_state.init(&thd, query_text, query_length)) {
     printf("Cannot initialize parser state\n");
   }
 
-  parser_state.m_input.m_compute_digest= true;
-    
-  rc= parse_sql(the, &parser_state, ctx);
-  if (! rc)    {
+  parser_state.m_input.m_compute_digest = true;
+
+  rc = parse_sql(the, &parser_state, &ctx);
+  if (!rc) {
     unsigned char md5[MD5_HASH_SIZE];
     char digest_text[1024];
     bool truncated;
-    const sql_digest_storage *digest= & thd->m_digest->m_digest_storage;
+    const sql_digest_storage *digest = &thd.m_digest->m_digest_storage;
 
-    compute_digest_md5(digest, & md5[0]);
-    compute_digest_text(digest, & digest_text[0], sizeof(digest_text), & truncated);
+    compute_digest_md5(digest, &md5[0]);
+    compute_digest_text(digest, &digest_text[0], sizeof(digest_text),
+                        &truncated);
   }
 }
