@@ -2,10 +2,6 @@
 #include <string.h>
 
 #include "sql_class.h"
-// #include "sql_digest.h"
-// #include "sql_lex.h"
-// #include "sql_parse.h"
-// #include "table.h"
 
 int main() {
   THD *thd = new THD;
